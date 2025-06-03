@@ -1,75 +1,389 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Achievements</title>
+    <title>Your Name - Professional Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        /* Custom styles can go here if needed, but Tailwind should cover most things */
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f4f6fb;
-            color: #222;
+            font-family: 'Inter', sans-serif; /* Tailwind's default sans-serif stack often includes Inter */
         }
-        header {
-            background: linear-gradient(90deg, #4f8cff 60%, #6ee7b7 100%);
-            background-image: url('your-image.jpg');
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            color: #fff;
-            padding: 2rem 0;
-            text-align: center;
+        .section-title {
+            @apply text-3xl font-bold text-center mb-12 text-gray-800;
         }
-        .container {
-            max-width: 800px;
-            margin: 2rem auto;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-            padding: 2rem;
+        .card { /* Base card style, will be used for individual project slides */
+            @apply bg-white rounded-xl shadow-lg overflow-hidden; /* Removed transform for slider items */
         }
-        h2 {
-            color: #4f8cff;
-            margin-top: 2rem;
+        .project-slide {
+            @apply hidden; /* Hide all slides by default */
         }
-        ul {
-            list-style: disc inside;
-            padding-left: 1rem;
+        .project-slide.active {
+            @apply block; /* Show active slide */
         }
-        .achievement {
-            margin-bottom: 1rem;
+        .button-primary {
+            @apply bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50;
         }
-        @media (max-width: 600px) {
-            .container {
-                padding: 1rem;
-            }
+        .button-secondary {
+            @apply bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50;
+        }
+        .slider-button {
+             @apply bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-all duration-150 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed;
+        }
+        nav a {
+            @apply px-4 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-colors;
+        }
+        nav a.active { /* Example for active link, JS needed for dynamic active state */
+            @apply bg-gray-900 text-white;
         }
     </style>
 </head>
-<body>
-    <header>
-        <h1>Welcome to My Landing Page</h1>
-        <p>Discover my personal and professional achievements</p>
+<body class="bg-gray-100 text-gray-700">
+
+    <header class="bg-gray-800 text-white sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold hover:text-indigo-300 transition-colors">Your Name</a>
+            <nav class="space-x-1 md:space-x-2 lg:space-x-4">
+                <a href="#about">About</a>
+                <a href="#resume">Resume</a>
+                <a href="#projects">Projects</a>
+                <a href="#blogs">Blogs</a>
+                <a href="#certifications">Certifications</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
     </header>
-    <div class="container">
-        <section>
-            <h2>Personal Achievements</h2>
-            <ul>
-                <li class="achievement">Completed a marathon in under 4 hours</li>
-                <li class="achievement">Learned to play the guitar</li>
-                <li class="achievement">Volunteered 100+ hours at local charities</li>
-            </ul>
-        </section>
-        <section>
-            <h2>Professional Achievements</h2>
-            <ul>
-                <li class="achievement">Promoted to Senior Developer at XYZ Corp</li>
-                <li class="achievement">Published 3 research papers in tech journals</li>
-                <li class="achievement">Led a team to deliver a major project ahead of schedule</li>
-            </ul>
-        </section>
-    </div>
+
+    <section id="hero" class="bg-indigo-700 text-white py-20 md:py-32">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome to My Portfolio</h1>
+            <p class="text-lg md:text-xl mb-8 text-indigo-200">Showcasing my journey, skills, and projects in [Your Field/Domain].</p>
+            <a href="#projects" class="button-primary text-lg">View My Work</a>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+                <div class="md:w-1/3 text-center">
+                    <img src="https://placehold.co/300x300/E2E8F0/4A5568?text=Your+Image" alt="Your Name" class="rounded-full shadow-xl mx-auto w-48 h-48 md:w-64 md:h-64 object-cover">
+                </div>
+                <div class="md:w-2/3 text-center md:text-left">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">Hello, I'm [Your Name]!</h3>
+                    <p class="mb-4 leading-relaxed">
+                        A passionate and [Your Adjective, e.g., dedicated, creative] [Your Profession/Student] based in [Your Location].
+                        I specialize in [Your Key Skills/Technologies, e.g., full-stack web development, UI/UX design, data analysis].
+                        I thrive on solving complex problems and creating impactful solutions.
+                    </p>
+                    <p class="mb-4 leading-relaxed">
+                        [Add another paragraph about your interests, goals, or what drives you. Make it personal and engaging.]
+                    </p>
+                    <div class="flex justify-center md:justify-start space-x-4 mt-6">
+                        <a href="YOUR_LINKEDIN_URL_HERE" target="_blank" class="text-indigo-600 hover:text-indigo-800 transition-colors">
+                            <i class="fab fa-linkedin fa-2x"></i>
+                        </a>
+                        <a href="YOUR_GITHUB_URL_HERE" target="_blank" class="text-indigo-600 hover:text-indigo-800 transition-colors">
+                            <i class="fab fa-github fa-2x"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="resume" class="py-16 md:py-24 bg-gray-50">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="section-title">My Resume</h2>
+            <p class="text-lg mb-8 max-w-2xl mx-auto">
+                Interested in learning more about my professional background, skills, and experience?
+                Download my resume to get a comprehensive overview.
+            </p>
+            <a href="resume.pdf" target="_blank" class="button-primary text-lg">
+                <i class="fas fa-download mr-2"></i>Download Resume (PDF)
+            </a>
+        </div>
+    </section>
+
+    <section id="projects" class="py-16 md:py-24">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">My Projects</h2>
+            <div class="relative max-w-2xl mx-auto">
+                <div id="project-slider-container">
+                    <div class="project-slide card active">
+                        <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Project+1" alt="Project 1 Thumbnail" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Project Title 1</h3>
+                            <p class="text-sm mb-4 leading-relaxed">
+                                A brief description of Project 1. Highlight key features and the problem it solves.
+                                Keep it concise and impactful.
+                            </p>
+                            <p class="text-xs text-gray-500 mb-4"><strong>Technologies:</strong> HTML, CSS, JavaScript, React</p>
+                            <div class="flex space-x-3">
+                                <a href="YOUR_PROJECT1_GITHUB_LINK" target="_blank" class="button-secondary text-sm flex-grow text-center">
+                                    <i class="fab fa-github mr-1"></i> View Code
+                                </a>
+                                <!-- <a href="YOUR_PROJECT1_LIVE_DEMO_LINK" target="_blank" class="button-primary text-sm flex-grow text-center">
+                                    <i class="fas fa-external-link-alt mr-1"></i> Live Demo
+                                </a> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-slide card">
+                        <img src="https://placehold.co/600x400/D1FAE5/065F46?text=Project+2" alt="Project 2 Thumbnail" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Project Title 2</h3>
+                            <p class="text-sm mb-4 leading-relaxed">
+                                Description for Project 2. What makes this project unique or interesting?
+                                Mention your role if it was a team project.
+                            </p>
+                            <p class="text-xs text-gray-500 mb-4"><strong>Technologies:</strong> Python, Django, PostgreSQL</p>
+                            <div class="flex space-x-3">
+                                <a href="YOUR_PROJECT2_GITHUB_LINK" target="_blank" class="button-secondary text-sm flex-grow text-center">
+                                    <i class="fab fa-github mr-1"></i> View Code
+                                </a>
+                                <!-- <a href="YOUR_PROJECT2_LIVE_DEMO_LINK" target="_blank" class="button-primary text-sm flex-grow text-center">
+                                    <i class="fas fa-external-link-alt mr-1"></i> Live Demo
+                                </a> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-slide card">
+                        <img src="https://placehold.co/600x400/DBEAFE/1E40AF?text=Project+3" alt="Project 3 Thumbnail" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Project Title 3</h3>
+                            <p class="text-sm mb-4 leading-relaxed">
+                                Another cool project. Focus on the outcome or impact if possible.
+                                What did you learn from this project?
+                            </p>
+                            <p class="text-xs text-gray-500 mb-4"><strong>Technologies:</strong> Node.js, Express, MongoDB</p>
+                            <div class="flex space-x-3">
+                                <a href="YOUR_PROJECT3_GITHUB_LINK" target="_blank" class="button-secondary text-sm flex-grow text-center">
+                                    <i class="fab fa-github mr-1"></i> View Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                <div class="flex justify-between items-center mt-8">
+                    <button id="prev-project-button" class="slider-button">
+                        <i class="fas fa-chevron-left mr-1"></i> Previous
+                    </button>
+                    <div id="project-dots-container" class="flex space-x-2">
+                        </div>
+                    <button id="next-project-button" class="slider-button">
+                        Next <i class="fas fa-chevron-right ml-1"></i>
+                    </button>
+                </div>
+                 <p id="project-counter" class="text-center text-sm text-gray-600 mt-4"></p>
+            </div>
+        </div>
+    </section>
+    <section id="blogs" class="py-16 md:py-24 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">Latest Blog Posts</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                <div class="card transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                    <img src="https://placehold.co/600x400/FEF3C7/92400E?text=Blog+Post+1" alt="Blog Post 1 Thumbnail" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <p class="text-xs text-gray-500 mb-1">Published on: <span class="font-semibold">May 28, 2025</span></p>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">My First Blog Post Title</h3>
+                        <p class="text-sm mb-4 leading-relaxed">
+                            A short excerpt from my first blog post. This is where I discuss interesting topics related to my field...
+                        </p>
+                        <a href="#" class="button-secondary text-sm w-full text-center">
+                            Read More <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                    <img src="https://placehold.co/600x400/FEE2E2/991B1B?text=Blog+Post+2" alt="Blog Post 2 Thumbnail" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <p class="text-xs text-gray-500 mb-1">Published on: <span class="font-semibold">June 02, 2025</span></p>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Exploring New Technologies</h3>
+                        <p class="text-sm mb-4 leading-relaxed">
+                            An overview of some exciting new technologies I've been exploring and learning about recently...
+                        </p>
+                        <a href="#" class="button-secondary text-sm w-full text-center">
+                            Read More <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                    <img src="https://placehold.co/600x400/E0E7FF/3730A3?text=Blog+Post+3" alt="Blog Post 3 Thumbnail" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <p class="text-xs text-gray-500 mb-1">Published on: <span class="font-semibold">June 10, 2025</span></p>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Tips for Aspiring Developers</h3>
+                        <p class="text-sm mb-4 leading-relaxed">
+                            Sharing some valuable tips and advice for those who are just starting their journey in development...
+                        </p>
+                        <a href="#" class="button-secondary text-sm w-full text-center">
+                            Read More <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#" class="button-primary">View All Posts</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">Certifications & Achievements</h2>
+            <div class="max-w-3xl mx-auto">
+                <ul class="space-y-6">
+                    <li class="p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                            <div>
+                                <h3 class="text-lg font-semibold text-indigo-700">Certification Name 1</h3>
+                                <p class="text-sm text-gray-600">Issuing Organization - Year Obtained</p>
+                            </div>
+                        </div>
+                        <p class="text-sm mt-2 text-gray-700">
+                            Briefly describe what this certification covers or its significance.
+                        </p>
+                    </li>
+                    <li class="p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                           <div>
+                                <h3 class="text-lg font-semibold text-indigo-700">Certification Name 2</h3>
+                                <p class="text-sm text-gray-600">Issuing Organization - Year Obtained</p>
+                           </div>
+                        </div>
+                        <p class="text-sm mt-2 text-gray-700">
+                            Key skills or knowledge gained from this certification.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-16 md:py-24 bg-gray-800 text-gray-300">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="section-title !text-white">Get In Touch</h2>
+            <p class="text-lg mb-8 max-w-xl mx-auto">
+                I'm always open to discussing new projects, creative ideas, or opportunities to be part of something amazing.
+                Feel free to reach out!
+            </p>
+            <a href="mailto:your.email@example.com" class="button-primary text-lg mb-10 inline-block">
+                <i class="fas fa-envelope mr-2"></i>Email Me
+            </a>
+            <div class="flex justify-center space-x-6">
+                <a href="YOUR_LINKEDIN_URL_HERE" target="_blank" class="hover:text-indigo-300 transition-colors">
+                    <i class="fab fa-linkedin fa-3x"></i>
+                </a>
+                <a href="YOUR_GITHUB_URL_HERE" target="_blank" class="hover:text-indigo-300 transition-colors">
+                    <i class="fab fa-github fa-3x"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center">
+        <div class="container mx-auto px-6">
+            <p>&copy; <span id="currentYear"></span> Your Name. All Rights Reserved.</p>
+            <p class="text-sm mt-1">Built with <i class="fas fa-heart text-red-500"></i> and Tailwind CSS.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Project Slider Functionality
+        const projectSlides = document.querySelectorAll('.project-slide');
+        const prevProjectButton = document.getElementById('prev-project-button');
+        const nextProjectButton = document.getElementById('next-project-button');
+        const projectDotsContainer = document.getElementById('project-dots-container');
+        const projectCounterElement = document.getElementById('project-counter');
+        let currentProjectIndex = 0;
+
+        function showProjectSlide(index) {
+            projectSlides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+            updateProjectDots(index);
+            updateProjectCounter(index);
+            // Disable/enable buttons
+            prevProjectButton.disabled = index === 0;
+            nextProjectButton.disabled = index === projectSlides.length - 1;
+        }
+
+        function updateProjectDots(activeIndex) {
+            projectDotsContainer.innerHTML = ''; // Clear existing dots
+            projectSlides.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.classList.add('w-3', 'h-3', 'rounded-full', 'transition-all', 'duration-150', 'ease-in-out');
+                if (i === activeIndex) {
+                    dot.classList.add('bg-indigo-600', 'scale-125');
+                } else {
+                    dot.classList.add('bg-gray-300', 'hover:bg-gray-400');
+                }
+                dot.addEventListener('click', () => {
+                    currentProjectIndex = i;
+                    showProjectSlide(currentProjectIndex);
+                });
+                projectDotsContainer.appendChild(dot);
+            });
+        }
+        
+        function updateProjectCounter(index) {
+            if (projectCounterElement) {
+                projectCounterElement.textContent = `Project ${index + 1} of ${projectSlides.length}`;
+            }
+        }
+
+        if (projectSlides.length > 0) {
+            prevProjectButton.addEventListener('click', () => {
+                if (currentProjectIndex > 0) {
+                    currentProjectIndex--;
+                    showProjectSlide(currentProjectIndex);
+                }
+            });
+
+            nextProjectButton.addEventListener('click', () => {
+                if (currentProjectIndex < projectSlides.length - 1) {
+                    currentProjectIndex++;
+                    showProjectSlide(currentProjectIndex);
+                }
+            });
+
+            // Initialize slider
+            showProjectSlide(currentProjectIndex);
+        } else {
+            // Handle case with no projects (e.g., hide slider controls)
+            if (prevProjectButton) prevProjectButton.style.display = 'none';
+            if (nextProjectButton) nextProjectButton.style.display = 'none';
+            if (projectDotsContainer) projectDotsContainer.style.display = 'none';
+            if (projectCounterElement) projectCounterElement.textContent = 'No projects to display.';
+        }
+
+    </script>
+
 </body>
 </html>
